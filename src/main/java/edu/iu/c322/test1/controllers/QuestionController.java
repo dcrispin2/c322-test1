@@ -22,6 +22,7 @@ public class QuestionController {
     }
 
 
+    @PostMapping
     public boolean add(@RequestBody Question question) {
         try {
             return fileRepository.add(question);
@@ -30,7 +31,7 @@ public class QuestionController {
         }
     }
 
-
+    @GetMapping
     public List<Question> findAll() {
         try {
             return fileRepository.findAll();
