@@ -41,7 +41,7 @@ public class QuestionController {
     }
 
     @GetMapping("/search")
-    public List<Question> find( String answer) {
+    public List<Question> find(@RequestParam String answer) {
         try {
             return fileRepository.find(answer);
         } catch (IOException e) {
@@ -50,7 +50,7 @@ public class QuestionController {
     }
 
     @GetMapping("/{id}")
-    public Question get( int id) {
+    public Question get(@RequestParam int id) {
         try {
             return fileRepository.get(id);
         } catch (IOException e) {
@@ -59,8 +59,8 @@ public class QuestionController {
     }
 
     @PostMapping("/{id}/image")
-    public boolean updateImage(int id,
-                                MultipartFile file) {
+    public boolean updateImage(@RequestParam int id,
+                               @RequestBody MultipartFile file) {
         try {
             return fileRepository.updateImage(id, file);
         } catch (IOException e) {
@@ -69,7 +69,7 @@ public class QuestionController {
     }
 
     @GetMapping("/{id}/image")
-    public ResponseEntity<?> getImage(int id) {
+    public ResponseEntity<?> getImage(@RequestParam int id) {
         try {
             byte[] image = fileRepository.getImage(id);
             return ResponseEntity.status(HttpStatus.FOUND)
